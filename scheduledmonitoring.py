@@ -1,8 +1,11 @@
 #! /usr/bin/python
 import threading
 import os
-region='Trento'
 import datetime
+region='Trento'
+dbname='pippo'
+username='pippo'
+password='pippo'
 
 def moveFolder():
     actualSample=datetime.date.fromordinal(datetime.date.today().toordinal()-1)
@@ -27,7 +30,7 @@ def mapredRegion():
     print "[RE] Start region map/reducer"
     os.system('/usr/bin/hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -file /home/xifi-mapReducer/mapperRegion.py -mapper mapperRegion.py -file /home/xifi-mapReducer/reducerRegion.py -reducer reducerRegion.py -input /user/hdfs/'region'-working/'+region+'-region-*.txt -output /user/hdfs/out/region/'+region);
     print "[RE] Start region sqoop"
-    os.system("/usr/bin/sqoop export --connect jdbc:mysql://193.205.211.69/monitoring --username monitoring --password  m0nit0ring --table region  --staging-table region_stage --clear-staging-table --export-dir /user/hdfs/out/region/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'")
+    os.system("/usr/bin/sqoop export --connect jdbc:mysql://193.205.211.69/"+dbname+" --username "+username+" --password  "+password+" --table region  --staging-table region_stage --clear-staging-table --export-dir /user/hdfs/out/region/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'")
     print "[RE] Ended region map/reducer"
 
 def mapredVM():
@@ -37,7 +40,7 @@ def mapredVM():
     print "[VM] Start vm map/reducer"
     os.system('/usr/bin/hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -file /home/xifi-mapReducer/mapperVM.py -mapper mapperVM.py -file /home/xifi-mapReducer/reducerVM.py -reducer reducerVM.py -input /user/hdfs/'+region+'-working/'+region+'*-vm-*.txt -output /user/hdfs/out/vm/'+region);
     print "[VM] Start vm sqoop"
-    os.system("/usr/bin/sqoop export --connect jdbc:mysql://193.205.211.69/monitoring --username monitoring --password  m0nit0ring --table vm  --staging-table vm_stage --clear-staging-table --export-dir /user/hdfs/out/vm/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'")
+    os.system("/usr/bin/sqoop export --connect jdbc:mysql://193.205.211.69/"+dbname+" --username "+username+" --password  "+password+" --table vm  --staging-table vm_stage --clear-staging-table --export-dir /user/hdfs/out/vm/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'")
     print "[RE] ended vm map/reducer"
 def mapredHostService():
     #host_service mapred
@@ -46,7 +49,7 @@ def mapredHostService():
     print "[HS] Start host_service map/reducer"
     os.system('/usr/bin/hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -file /home/xifi-mapReducer/mapperHS.py -mapper mapperHS.py -file /home/xifi-mapReducer/reducerHS.py -reducer reducerHS.py -input /user/hdfs/'+region+'-working/'+region+'*-host_service-*.txt -output /user/hdfs/out/host_service/'+region);
     print "[HS] Start host_service sqoop"
-    os.system("/usr/bin/sqoop export --connect jdbc:mysql://193.205.211.69/monitoring --username monitoring --password  m0nit0ring --table host_service  --staging-table host_service_stage --clear-staging-table --export-dir /user/hdfs/out/host_service/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'");
+    os.system("/usr/bin/sqoop export --connect jdbc:mysql://193.205.211.69/"+dbname+" --username "+username+" --password  "+password+" --table host_service  --staging-table host_service_stage --clear-staging-table --export-dir /user/hdfs/out/host_service/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'");
     print "[HS] ended host_service map/reducer";
 
 actions=['region', 'vm', 'host_service']
