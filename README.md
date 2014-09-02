@@ -32,7 +32,7 @@ xifi-script
 |password|*set the db user password*|
 
 
-* Table host_service:
+* subscribeHadoop.py:
 
 |name       |description |
 |-----------|-----------|
