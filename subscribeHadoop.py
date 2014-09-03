@@ -39,8 +39,7 @@ def subscribeRegion():
         </condValueList>\
       </notifyCondition>\
     </notifyConditions>\
-  </subscribeContextRequest>\
-  EOF';
+  </subscribeContextRequest>';
   c.setopt(c.POSTFIELDS, updated_body)
   c.setopt(c.POST, 1)
   try:
@@ -88,8 +87,7 @@ def subscribeHost_service():
       </notifyCondition>\
     </notifyConditions>\
     <throttling>PT60S</throttling>\
-  </subscribeContextRequest>\
-  EOF';
+  </subscribeContextRequest>';
   c.setopt(c.POSTFIELDS, updated_body)
   c.setopt(c.POST, 1)
   try:
@@ -123,8 +121,7 @@ def subscribeVM():
         </condValueList>\
       </notifyCondition>\
     </notifyConditions>\
-  </subscribeContextRequest>\
-  EOF';
+  </subscribeContextRequest>';
   c.setopt(c.POSTFIELDS, updated_body)
   c.setopt(c.POST, 1)
   try:
