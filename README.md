@@ -13,8 +13,8 @@ xifi-script
     * this subscribes the ngsi2cosmos adapter to receive the data from the region CB
     * MUST be run only ONCE
 4. testAPI.js:
-    * it is script that is useful in order to test the monitoring API
-    * remember to require and set the ConsumerKey ConsumerSecret
+    * it is a script that is useful in order to test the monitoring API
+    * remember to require and set the ConsumerKey and the ConsumerSecret
     * node testAPI.js <username> <password> <apiPath>
 
 ###Additional configuration:
