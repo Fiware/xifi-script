@@ -15,7 +15,7 @@ xifi-script
 4. testAPI.js:
     * it is a script that is useful in order to test the monitoring API
     * remember to require and set the ConsumerKey and the ConsumerSecret
-    * node testAPI.js \<username\> <password> <apiPath>
+    * node testAPI.js \<username\> \<password\> \<apiPath\>
 
 ###Additional configuration:
 * ngsi2cosmos:
