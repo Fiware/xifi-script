@@ -1,7 +1,7 @@
 xifi-script
 ===============
 ##General Information
-###This repo is composed by these 3 scripts:
+###This repo is composed by these 4 scripts:
 1. ngsi2cosmos:
     * this is the /etc/init.d script that performs the start/stop/status actions for the ngsi2cosmsos
     * IMPORTANT: check if the ngsi2cosmsos is under this path: */etc/monitoring/*
@@ -12,6 +12,10 @@ xifi-script
 3.  subscribeHadoop.py:
     * this subscribes the ngsi2cosmos adapter to receive the data from the region CB
     * MUST be run only ONCE
+4. testAPI.js:
+    * it is script that is useful in order to test the monitoring API
+    * remember to require and set the ConsumerKey ConsumerSecret
+    * node testAPI.js <username> <password> <apiPath>
 
 ###Additional configuration:
 * ngsi2cosmos:
@@ -39,6 +43,14 @@ xifi-script
 |region|*set the region name*|
 |CBurl|*set the ContextBroker IP:Port*|
 |hadoopMasterIP|*set the hadoopMaster IP:Port*|
+
+
+* testAPI.js:
+
+|name          |description |
+|--------------|-----------|
+|ConsumerKey|*set the oauth2 app-key*|
+|ConsumerSecret|*set the oauth2 app-secret*|
 
 
 ##Contact
