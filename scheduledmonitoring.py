@@ -51,8 +51,20 @@ def mapredHostService():
     print "[HS] Start host_service sqoop"
     os.system("/usr/bin/sqoop export --connect jdbc:mysql://193.205.211.69/"+dbname+" --username "+username+" --password  "+password+" --table host_service  --staging-table host_service_stage --clear-staging-table --export-dir /user/hdfs/out/host_service/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'");
     print "[HS] ended host_service map/reducer";
+    
+    
+def mapredHost():
+    #host_service mapred
+    print "[H] Remove host folder if present"
+    os.system('/usr/bin/hdfs dfs -rm -r /user/hdfs/out/host/'+region)
+    print "[H] Start host map/reducer"
+    os.system('/usr/bin/hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -file /home/xifi-mapReducer/mapperH.py -mapper mapperH.py -file /home/xifi-mapReducer/reducerH.py -reducer reducerH.py -input /user/hdfs/'+region+'-working/'+region+'*-host-*.txt -output /user/hdfs/out/host/'+region);
+    print "[H] Start host_service sqoop"
+    os.system("/usr/bin/sqoop export --connect jdbc:mysql://193.205.211.69/"+dbname+" --username "+username+" --password  "+password+" --table host  --staging-table host_stage --clear-staging-table --export-dir /user/hdfs/out/host/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'");
+    print "[H] ended host map/reducer";    
 
-actions=['region', 'vm', 'host_service']
+
+actions=['region', 'vm', 'host_service', 'host']
 threads = []
 
 print "Starting.."
@@ -72,7 +84,10 @@ for act in actions:
         thread = threading.Thread(target=mapredHostService);
         thread.start();
         threads.append(thread);    
-
+    elif act == 'host':
+        thread = threading.Thread(target=mapredHost);
+        thread.start();
+        threads.append(thread);    
 # to wait until all three functions are finished
 
 
