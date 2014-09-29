@@ -2,10 +2,10 @@
 import threading
 import os
 import datetime
-region='Trento'
-dbname='pippo'
-username='pippo'
-password='pippo'
+region='xyz'
+dbname='xyz'
+username='xyz'
+password='xyz'
 
 def moveFolder():
     actualSample=datetime.date.fromordinal(datetime.date.today().toordinal()-1)
@@ -28,7 +28,7 @@ def mapredRegion():
     print "[RE] Remove region folder (if present)"
     os.system('/usr/bin/hdfs dfs -rm -r /user/hdfs/out/region/'+region)
     print "[RE] Start region map/reducer"
-    os.system('/usr/bin/hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -file /home/xifi-mapReducer/mapperRegion.py -mapper mapperRegion.py -file /home/xifi-mapReducer/reducerRegion.py -reducer reducerRegion.py -input /user/hdfs/'region'-working/'+region+'-region-*.txt -output /user/hdfs/out/region/'+region);
+    os.system('/usr/bin/hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -file /home/xifi-mapReducer/mapperRegion.py -mapper mapperRegion.py -file /home/xifi-mapReducer/reducerRegion.py -reducer reducerRegion.py -input /user/hdfs/'+region+'-working/'+region+'-region-*.txt -output /user/hdfs/out/region/'+region);
     print "[RE] Start region sqoop"
     os.system("/usr/bin/sqoop export --connect jdbc:mysql://193.205.211.69/"+dbname+" --username "+username+" --password  "+password+" --table region  --staging-table region_stage --clear-staging-table --export-dir /user/hdfs/out/region/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'")
     print "[RE] Ended region map/reducer"
@@ -42,6 +42,7 @@ def mapredVM():
     print "[VM] Start vm sqoop"
     os.system("/usr/bin/sqoop export --connect jdbc:mysql://193.205.211.69/"+dbname+" --username "+username+" --password  "+password+" --table vm  --staging-table vm_stage --clear-staging-table --export-dir /user/hdfs/out/vm/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'")
     print "[RE] ended vm map/reducer"
+    
 def mapredHostService():
     #host_service mapred
     print "[HS] Remove host_service folder if present"
