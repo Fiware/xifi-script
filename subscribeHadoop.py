@@ -167,8 +167,11 @@ def subscribeHost():
 
 def main():
   subscribeRegion();
+  time.sleep(1);
   subscribeHost_service();
+  time.sleep(1);
   subscribeVM();
+  time.sleep(1);
   subscribeHost();
 
 main()
