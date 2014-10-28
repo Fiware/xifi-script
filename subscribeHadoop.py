@@ -30,7 +30,7 @@ def subscribeRegion():
       <attribute>ramTot</attribute>\
     </attributeList>\
     <reference>'+hadoopListenUrl+'</reference>\
-    <duration>P12M</duration>\
+    <duration>P12Y</duration>\
     <notifyConditions>\
       <notifyCondition>\
         <type>ONTIMEINTERVAL</type>\
@@ -77,7 +77,7 @@ def subscribeHost_service():
       <attribute>nova_novncproxy</attribute>\
     </attributeList>\
     <reference>'+hadoopListenUrl+'</reference>\
-    <duration>P12M</duration>\
+    <duration>P12Y</duration>\
     <notifyConditions>\
       <notifyCondition>\
         <type>ONCHANGE</type>\
@@ -112,7 +112,7 @@ def subscribeVM():
       <attribute>usedMemPct</attribute>\
     </attributeList>\
     <reference>'+hadoopListenUrl+'</reference>\
-    <duration>P12M</duration>\
+    <duration>P12Y</duration>\
     <notifyConditions>\
       <notifyCondition>\
         <type>ONTIMEINTERVAL</type>\
@@ -129,14 +129,14 @@ def subscribeVM():
   except:
     print("Unable to connect to the contextBroker")
 
-def subscribeHost():
+def subscribeHostCT():
   c = pycurl.Curl()
   c.setopt(c.URL, agentUrl)
   c.setopt(c.HTTPHEADER, ['Content-Type: application/xml'])
   updated_body='<?xml version="1.0"?>\
   <subscribeContextRequest>\
     <entityIdList>\
-      <entityId type="host" isPattern="true">\
+      <entityId type="host_controller" isPattern="true">\
         <id>'+region+'.*</id>\
       </entityId>\
     </entityIdList>\
@@ -147,7 +147,7 @@ def subscribeHost():
       <attribute>hostname</attribute>\
     </attributeList>\
     <reference>'+hadoopListenUrl+'</reference>\
-    <duration>P12M</duration>\
+    <duration>P12Y</duration>\
     <notifyConditions>\
       <notifyCondition>\
         <type>ONTIMEINTERVAL</type>\
@@ -164,6 +164,40 @@ def subscribeHost():
   except:
     print("Unable to connect to the contextBroker")
 
+def subscribeHostCP():
+  c = pycurl.Curl()
+  c.setopt(c.URL, agentUrl)
+  c.setopt(c.HTTPHEADER, ['Content-Type: application/xml'])
+  updated_body='<?xml version="1.0"?>\
+  <subscribeContextRequest>\
+    <entityIdList>\
+      <entityId type="host_compute" isPattern="true">\
+        <id>'+region+'.*</id>\
+      </entityId>\
+    </entityIdList>\
+    <attributeList>\
+      <attribute>cpuLoadPct</attribute>\
+      <attribute>freeSpacePct</attribute>\
+      <attribute>usedMemPct</attribute>\
+      <attribute>hostname</attribute>\
+    </attributeList>\
+    <reference>'+hadoopListenUrl+'</reference>\
+    <duration>P12Y</duration>\
+    <notifyConditions>\
+      <notifyCondition>\
+        <type>ONTIMEINTERVAL</type>\
+        <condValueList>\
+          <condValue>PT60S</condValue>\
+        </condValueList>\
+      </notifyCondition>\
+    </notifyConditions>\
+  </subscribeContextRequest>';
+  c.setopt(c.POSTFIELDS, updated_body)
+  c.setopt(c.POST, 1)
+  try:
+    c.perform()
+  except:
+    print("Unable to connect to the contextBroker")
 
 def main():
   subscribeRegion();
@@ -172,6 +206,8 @@ def main():
   time.sleep(1);
   subscribeVM();
   time.sleep(1);
-  subscribeHost();
+  subscribeHostCT();
+  time.sleep(1);
+  subscribeHostCP();
 
 main()
