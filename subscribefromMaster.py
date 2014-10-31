@@ -47,5 +47,6 @@ def main(argv):
            fo.write(regionName+' '+srv+': ERROR\n')
       fo.close();
 
+
 if __name__ == "__main__":
   main(sys.argv[1:])

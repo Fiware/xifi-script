@@ -6,6 +6,7 @@ region='xyz'
 dbname='xyz'
 username='xyz'
 password='xyz'
+dbIP="10.0.32.20"
 
 def moveFolder():
     actualSample=datetime.date.fromordinal(datetime.date.today().toordinal()-1)
@@ -30,7 +31,7 @@ def mapredRegion():
     print "[RE] Start region map/reducer"
     os.system('/usr/bin/hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -file /home/xifi-mapReducer/mapperRegion.py -mapper mapperRegion.py -file /home/xifi-mapReducer/reducerRegion.py -reducer reducerRegion.py -input /user/hdfs/'+region+'-working/'+region+'-region-*.txt -output /user/hdfs/out/region/'+region);
     print "[RE] Start region sqoop"
-    os.system("/usr/bin/sqoop export --connect jdbc:mysql://10.0.32.20 /"+dbname+" --username "+username+" --password  "+password+" --table region  --staging-table region_stage --clear-staging-table --export-dir /user/hdfs/out/region/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'")
+    os.system("/usr/bin/sqoop export --connect jdbc:mysql://"+dbIP+"/"+dbname+" --username "+username+" --password  "+password+" --table region  --staging-table region_stage --clear-staging-table --export-dir /user/hdfs/out/region/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'")
     print "[RE] Ended region map/reducer"
 
 def mapredVM():
@@ -40,7 +41,7 @@ def mapredVM():
     print "[VM] Start vm map/reducer"
     os.system('/usr/bin/hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -file /home/xifi-mapReducer/mapperVM.py -mapper mapperVM.py -file /home/xifi-mapReducer/reducerVM.py -reducer reducerVM.py -input /user/hdfs/'+region+'-working/'+region+'*-vm-*.txt -output /user/hdfs/out/vm/'+region);
     print "[VM] Start vm sqoop"
-    os.system("/usr/bin/sqoop export --connect jdbc:mysql://10.0.32.20 /"+dbname+" --username "+username+" --password  "+password+" --table vm  --staging-table vm_stage --clear-staging-table --export-dir /user/hdfs/out/vm/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'")
+    os.system("/usr/bin/sqoop export --connect jdbc:mysql://"+dbIP+"/"+dbname+" --username "+username+" --password  "+password+" --table vm  --staging-table vm_stage --clear-staging-table --export-dir /user/hdfs/out/vm/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'")
     print "[RE] ended vm map/reducer"
     
 def mapredHostService():
@@ -50,7 +51,7 @@ def mapredHostService():
     print "[HS] Start host_service map/reducer"
     os.system('/usr/bin/hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -file /home/xifi-mapReducer/mapperHS.py -mapper mapperHS.py -file /home/xifi-mapReducer/reducerHS.py -reducer reducerHS.py -input /user/hdfs/'+region+'-working/'+region+'*-host_service-*.txt -output /user/hdfs/out/host_service/'+region);
     print "[HS] Start host_service sqoop"
-    os.system("/usr/bin/sqoop export --connect jdbc:mysql://10.0.32.20 /"+dbname+" --username "+username+" --password  "+password+" --table host_service  --staging-table host_service_stage --clear-staging-table --export-dir /user/hdfs/out/host_service/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'");
+    os.system("/usr/bin/sqoop export --connect jdbc:mysql://"+dbIP+"/"+dbname+" --username "+username+" --password  "+password+" --table host_service  --staging-table host_service_stage --clear-staging-table --export-dir /user/hdfs/out/host_service/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'");
     print "[HS] ended host_service map/reducer";
     
     
@@ -61,7 +62,7 @@ def mapredHostController():
     print "[H] Start host_controller map/reducer"
     os.system('/usr/bin/hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -file /home/xifi-mapReducer/mapperHCT.py -mapper mapperHCT.py -file /home/xifi-mapReducer/reducerHCT.py -reducer reducerHCT.py -input /user/hdfs/'+region+'-working/'+region+'*-host_controller-*.txt -output /user/hdfs/out/host_controller/'+region);
     print "[H] Start host_controller sqoop"
-    os.system("/usr/bin/sqoop export --connect jdbc:mysql://10.0.32.20 /"+dbname+" --username "+username+" --password  "+password+" --table host  --staging-table host_stage --clear-staging-table --export-dir /user/hdfs/out/host_controller/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'");
+    os.system("/usr/bin/sqoop export --connect jdbc:mysql://"+dbIP+"/"+dbname+" --username "+username+" --password  "+password+" --table host  --staging-table host_stage --clear-staging-table --export-dir /user/hdfs/out/host_controller/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'");
     print "[H] ended host_controller map/reducer";    
 
 def mapredHostCompute():
@@ -71,7 +72,7 @@ def mapredHostCompute():
     print "[H] Start host_compute map/reducer"
     os.system('/usr/bin/hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -file /home/xifi-mapReducer/mapperHCP.py -mapper mapperHCP.py -file /home/xifi-mapReducer/reducerHCP.py -reducer reducerHCP.py -input /user/hdfs/'+region+'-working/'+region+'*-host_compute-*.txt -output /user/hdfs/out/host_compute/'+region);
     print "[H] Start host_compute sqoop"
-    os.system("/usr/bin/sqoop export --connect jdbc:mysql://10.0.32.20 /"+dbname+" --username "+username+" --password  "+password+" --table host  --staging-table host_stage --clear-staging-table --export-dir /user/hdfs/out/host_compute/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'");
+    os.system("/usr/bin/sqoop export --connect jdbc:mysql://"+dbIP+"/"+dbname+" --username "+username+" --password  "+password+" --table host  --staging-table host_stage --clear-staging-table --export-dir /user/hdfs/out/host_compute/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'");
     print "[H] ended host_compute map/reducer";  
 
 
