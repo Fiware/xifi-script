@@ -17,7 +17,7 @@ var OAuth2 = OAuth.OAuth2;
 var ConsumerKey = '';
 var ConsumerSecret = '';
 CBIP="193.205.211.69";
-var oauth2 = new OAuth2(ConsumerKey, ConsumerSecret, 'https://account.lab.fi-ware.org/',  'oauth/authorize', 'oauth2/token',  null);
+var oauth2 = new OAuth2(ConsumerKey, ConsumerSecret, 'https://account.lab.fiware.org/',  'oauth/authorize', 'oauth2/token',  null);
 
 function testAPI(){
   if (process.argv.length==5){
@@ -27,7 +27,7 @@ function testAPI(){
     }
   }
   else{
-    console.log("Not enough arugments. Usage:\nnode testAPI.js <username> <password> ");
+    console.log("Not enough arugments. Usage:\nnode testAPI.js <username> <password> <url_path>");
   }
 }
 
