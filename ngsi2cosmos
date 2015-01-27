@@ -5,8 +5,8 @@
 # description: ngsi2cosmos daemon
 # processname: ngsi2cosmos
 
-REGION="Trento"
-ThisIP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
+REGION="regionName"
+ThisIP="aa.bb.cc.dd <--physical interface that is linked to the md-vpn"
 
 DAEMON_PATH="/etc/monitoring/ngsi2cosmos"
 DAEMON="/usr/bin/python ngsi2cosmos.py"

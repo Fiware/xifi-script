@@ -1,9 +1,10 @@
 import pycurl
 import cStringIO
 import time
-region="Trento"
-CBurl="x.y.v.z:port"
-hadoopMasterIP="x.y.v.z:5050"
+region="regionName"
+CBurl="x.y.v.z:1026"
+hadoopMasterIP="a.b.c.b:5050"
+
 agentUrl=CBurl+"/NGSI10/subscribeContext"
 hadoopListenUrl="http://"+hadoopMasterIP+"/notify"
 
@@ -107,9 +108,12 @@ def subscribeVM():
       </entityId>\
     </entityIdList>\
     <attributeList>\
+      <attribute>uid</attribute>\
       <attribute>cpuLoadPct</attribute>\
       <attribute>freeSpacePct</attribute>\
       <attribute>usedMemPct</attribute>\
+      <attribute>host_name</attribute>\
+      <attribute>host_id</attribute>\
     </attributeList>\
     <reference>'+hadoopListenUrl+'</reference>\
     <duration>P12Y</duration>\
