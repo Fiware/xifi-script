@@ -19,6 +19,7 @@ def moveFolder():
     os.system('/usr/bin/hdfs dfs -mkdir /user/hdfs/'+region+'-working')
     print "Moving all dayly files.." 
     os.system('/usr/bin/hdfs dfs -mv /user/hdfs/'+region+'/*'+actualTxt+'*  /user/hdfs/'+region+'-working ')
+    os.system('/usr/bin/hdfs fsck /user/hdfs/'+region+'-working -delete');
     #Move the folder
 
 def removeFolder():
