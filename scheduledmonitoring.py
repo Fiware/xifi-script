@@ -10,8 +10,6 @@ password='xxxxxxxxx'
 dbIP="10.0.32.20"
 
 
-
-
 def moveFolder():
     actualSample=datetime.date.fromordinal(datetime.date.today().toordinal()-1)
     actualTxt=actualSample.strftime('%d_%m_%Y')
@@ -69,35 +67,13 @@ def mapredHost():
     os.system("/usr/bin/sqoop export --connect jdbc:mysql://"+dbIP+"/"+dbname+" --username "+username+" --password  "+password+" --table host  --staging-table host_stage_"+region+" --clear-staging-table --export-dir /user/hdfs/out/host/"+region+"/part-* --input-fields-terminated-by '\\t' -m 1 --input-null-string '\\n' --input-null-non-string '\\n'");
     print "[H] ended host_compute/host_controller map/reducer";
 
-actions=['region', 'vm', 'host_service', 'host']
-threads = []
 
 print "Starting.."
 removeFolder();
 moveFolder();
-
-for act in actions:
-    if act == 'region':
-        thread = threading.Thread(target=mapredRegion);
-        thread.start();
-        threads.append(thread);
-    elif act == 'vm':
-        thread = threading.Thread(target=mapredVM);
-        thread.start();
-        threads.append(thread);
-    elif act == 'host_service':
-        thread = threading.Thread(target=mapredHostService);
-        thread.start();
-        threads.append(thread);    
-    elif act == 'host':
-        thread = threading.Thread(target=mapredHost);
-        thread.start();
-        threads.append(thread);
-# to wait until all three functions are finished
-
-
-print "Waiting..."
-for thread in threads:
-    thread.join()
+mapredRegion();
+mapredVM();
+mapredHost();
+mapredHostService();
 print "Complete."
 removeFolder()
