@@ -16,9 +16,12 @@ def moveFolder():
     #now=datetime.datetime.now()
     #actualTxt=now.strftime('%d_%m_%Y');
     print "creating working-folder.."
+    os.system('/usr/bin/hdfs fsck /user/hdfs/'+region+' -delete');
+    os.system('/usr/bin/hdfs fsck /user/hdfs/'+region+' -delete');
     os.system('/usr/bin/hdfs dfs -mkdir /user/hdfs/'+region+'-working')
     print "Moving all dayly files.." 
-    os.system('/usr/bin/hdfs dfs -mv /user/hdfs/'+region+'/*'+actualTxt+'*  /user/hdfs/'+region+'-working ')
+    os.system('/usr/bin/hdfs dfs -mv /user/hdfs/'+region+'/*'+actualTxt+'*.txt  /user/hdfs/'+region+'-working ')
+    os.system('/usr/bin/hdfs fsck /user/hdfs/'+region+'-working -delete');
     os.system('/usr/bin/hdfs fsck /user/hdfs/'+region+'-working -delete');
     #Move the folder
 
