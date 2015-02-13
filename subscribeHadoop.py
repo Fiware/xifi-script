@@ -87,7 +87,6 @@ def subscribeHost_service():
         </condValueList>\
       </notifyCondition>\
     </notifyConditions>\
-    <throttling>PT60S</throttling>\
   </subscribeContextRequest>';
   c.setopt(c.POSTFIELDS, updated_body)
   c.setopt(c.POST, 1)
