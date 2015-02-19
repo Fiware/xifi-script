@@ -88,5 +88,6 @@ mapredRegion();
 mapredVM();
 mapredHost();
 mapredHostService();
+removeFolder()
 print "Complete."
-#removeFolder()
+

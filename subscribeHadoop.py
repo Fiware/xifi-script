@@ -203,14 +203,14 @@ def subscribeHostCP():
     print("Unable to connect to the contextBroker")
 
 def main():
-  #subscribeRegion();
-  #time.sleep(1);
-  #subscribeHost_service();
-  #time.sleep(1);
+  subscribeRegion();
+  time.sleep(5);
+  subscribeHost_service();
+  time.sleep(5);
   subscribeVM();
-  #time.sleep(1);
-  #subscribeHostCT();
-  #time.sleep(1);
-  #subscribeHostCP();
+  time.sleep(5);
+  subscribeHostCT();
+  time.sleep(5);
+  subscribeHostCP();
 
 main()
