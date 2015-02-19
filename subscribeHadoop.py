@@ -1,9 +1,9 @@
 import pycurl
 import cStringIO
 import time
-region="Trento"
-CBurl="XXXX:1026"
-hadoopMasterIP="XXXX:5050"
+region="XXXX"
+CBurl="XXXXX:1026"
+hadoopMasterIP="XXXXXX:5050"
 agentUrl=CBurl+"/NGSI10/subscribeContext"
 hadoopListenUrl="http://"+hadoopMasterIP+"/notify"
 
