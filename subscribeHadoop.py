@@ -1,10 +1,9 @@
 import pycurl
 import cStringIO
 import time
-region="regionName"
-CBurl="x.y.v.z:1026"
-hadoopMasterIP="a.b.c.b:5050"
-
+region="Trento"
+CBurl="XXXX:1026"
+hadoopMasterIP="XXXX:5050"
 agentUrl=CBurl+"/NGSI10/subscribeContext"
 hadoopListenUrl="http://"+hadoopMasterIP+"/notify"
 
@@ -87,7 +86,6 @@ def subscribeHost_service():
         </condValueList>\
       </notifyCondition>\
     </notifyConditions>\
-    <throttling>PT60S</throttling>\
   </subscribeContextRequest>';
   c.setopt(c.POSTFIELDS, updated_body)
   c.setopt(c.POST, 1)
@@ -201,17 +199,18 @@ def subscribeHostCP():
   try:
     c.perform()
   except:
+
     print("Unable to connect to the contextBroker")
 
 def main():
-  subscribeRegion();
-  time.sleep(1);
-  subscribeHost_service();
-  time.sleep(1);
+  #subscribeRegion();
+  #time.sleep(1);
+  #subscribeHost_service();
+  #time.sleep(1);
   subscribeVM();
-  time.sleep(1);
-  subscribeHostCT();
-  time.sleep(1);
-  subscribeHostCP();
+  #time.sleep(1);
+  #subscribeHostCT();
+  #time.sleep(1);
+  #subscribeHostCP();
 
 main()
