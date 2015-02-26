@@ -60,7 +60,7 @@ def subscribeHost_service():
     </entityIdList>\
     <attributeList>\
       <attribute>cinder_api</attribute>\
-      <attribute>cinder_schedule</attribute>\
+      <attribute>cinder_scheduler</attribute>\
       <attribute>glance_api</attribute>\
       <attribute>glance_registry</attribute>\
       <attribute>nova_api</attribute>\
@@ -69,7 +69,7 @@ def subscribeHost_service():
       <attribute>quantum_l3_agent</attribute>\
       <attribute>nova_scheduler</attribute>\
       <attribute>nova_conductor</attribute>\
-      <attribute>nova_consoleaut</attribute>\
+      <attribute>nova_consoleauth</attribute>\
       <attribute>nova_objectstore</attribute>\
       <attribute>quantum_server</attribute>\
       <attribute>quantum_openvswitch_agent</attribute>\
