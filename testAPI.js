@@ -6,17 +6,17 @@
 // This is an API tester for the XIFI monitoring APIs                   //
 /************************************************************************/
 
-
-
 var OAuth = require('oauth');
 var http = require('http');
-
 var APIpath='';
 var OAuth2 = OAuth.OAuth2;
-//ask in order to obtain the ConsumerKey and ConsumerSecret
-var ConsumerKey = '';
-var ConsumerSecret = '';
-CBIP="193.205.211.69";
+
+//create a key secret using the portal or ask in order to obtain the ConsumerKey and ConsumerSecret
+var ConsumerKey='<KEY>';
+var ConsumerSecret =  '<SECRET>';
+var APIip  ="<IP>";
+var APIport="<PORT>";
+
 var oauth2 = new OAuth2(ConsumerKey, ConsumerSecret, 'https://account.lab.fiware.org/',  'oauth/authorize', 'oauth2/token',  null);
 
 function testAPI(){
@@ -32,14 +32,15 @@ function testAPI(){
 }
 
 function manageCred(e, access_token, refresh_token, results){
+  console.log(access_token);
   makeRequest(access_token)
 }
 
 var makeRequest=function(token){
   var bearer=new Buffer(token).toString("base64");
   var options={
-               hostname:CBIP,
-               port:1026,
+               hostname:APIip,
+               port:APIport,
                path:APIpath,
                method:"GET",
                headers:{'Authorization':'Bearer '+bearer, 'accept':'application/json'}
@@ -53,5 +54,4 @@ var makeRequest=function(token){
 }
 
 testAPI();
-
 
