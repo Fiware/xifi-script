@@ -45,7 +45,7 @@ def mapredRegion():
     print "[RE] Start region map/reducer"
     os.system('/usr/bin/hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -file /home/xifi-mapReducer/mapperRegion.py -mapper mapperRegion.py -file /home/xifi-mapReducer/reducerRegion.py -reducer reducerRegion.py -input /user/hdfs/'+region+'-working/REGION.txt -output /user/hdfs/out/region/'+region);
     print "[RE] Start region sqoop"
-    os.system("/usr/bin/sqoop export -D mapred.task.timeout=0  --connect jdbc:mysql://"+dbIP+"/"+dbname+" --username "+username+" --password  "+password+" --table region  --staging-table region_stage_"+region+" --clear-staging-table --export-dir /user/hdfs/out/region/"+region+"/part-* --input-fields-terminated-by '\\t' --input-lines-terminated-by '\\n' -m 1")
+    os.system("/usr/bin/sqoop export --connect jdbc:mysql://"+dbIP+"/"+dbname+" --username "+username+" --password  "+password+" --table region  --staging-table region_stage_"+region+" --clear-staging-table --export-dir /user/hdfs/out/region/"+region+"/part-* --input-fields-terminated-by '\\t' --input-lines-terminated-by '\\n' -m 1")
     print "[RE] Ended region map/reducer"
 
 def mapredVM():
@@ -55,7 +55,7 @@ def mapredVM():
     print "[VM] Start vm map/reducer"
     os.system('/usr/bin/hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -file /home/xifi-mapReducer/mapperVM.py -mapper mapperVM.py -file /home/xifi-mapReducer/reducerVM.py -reducer reducerVM.py -input /user/hdfs/'+region+'-working/VM.txt -output /user/hdfs/out/vm/'+region);
     print "[VM] Start vm sqoop"
-    os.system("/usr/bin/sqoop export -D mapred.task.timeout=0 --connect jdbc:mysql://"+dbIP+"/"+dbname+" --username "+username+" --password  "+password+" --table vm  --staging-table vm_stage_"+region+" --clear-staging-table --export-dir /user/hdfs/out/vm/"+region+"/part-* --input-fields-terminated-by '\\t' --input-lines-terminated-by '\\n' -m 1")
+    os.system("/usr/bin/sqoop export --connect jdbc:mysql://"+dbIP+"/"+dbname+" --username "+username+" --password  "+password+" --table vm  --staging-table vm_stage_"+region+" --clear-staging-table --export-dir /user/hdfs/out/vm/"+region+"/part-* --input-fields-terminated-by '\\t' --input-lines-terminated-by '\\n' -m 1")
     print "[RE] ended vm map/reducer"
     
 def mapredHostService():
@@ -65,7 +65,7 @@ def mapredHostService():
     print "[HS] Start host_service map/reducer"
     os.system('/usr/bin/hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -file /home/xifi-mapReducer/mapperHS.py -mapper mapperHS.py -file /home/xifi-mapReducer/reducerHS.py -reducer reducerHS.py -input /user/hdfs/'+region+'-working/HOST_SERVICE.txt -output /user/hdfs/out/host_service/'+region);
     print "[HS] Start host_service sqoop"
-    os.system("/usr/bin/sqoop export -D mapred.task.timeout=0 --connect jdbc:mysql://"+dbIP+"/"+dbname+" --username "+username+" --password  "+password+" --table host_service  --staging-table host_service_stage_"+region+" --clear-staging-table --export-dir /user/hdfs/out/host_service/"+region+"/part-* --input-fields-terminated-by '\\t' --input-lines-terminated-by '\\n' -m 1");
+    os.system("/usr/bin/sqoop export --connect jdbc:mysql://"+dbIP+"/"+dbname+" --username "+username+" --password  "+password+" --table host_service  --staging-table host_service_stage_"+region+" --clear-staging-table --export-dir /user/hdfs/out/host_service/"+region+"/part-* --input-fields-terminated-by '\\t' --input-lines-terminated-by '\\n' -m 1");
     print "[HS] ended host_service map/reducer";
     
     
@@ -76,7 +76,7 @@ def mapredHost():
     print "[H] Start host_controller/host_compute map/reducer"
     os.system('/usr/bin/hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -file /home/xifi-mapReducer/mapperH.py -mapper mapperH.py -file /home/xifi-mapReducer/reducerH.py -reducer reducerH.py -input /user/hdfs/'+region+'-working/HOST.txt -output /user/hdfs/out/host/'+region);
     print "[H] Start host_compute/host_controller sqoop"
-    os.system("/usr/bin/sqoop export -D mapred.task.timeout=0 --connect jdbc:mysql://"+dbIP+"/"+dbname+" --username "+username+" --password  "+password+" --table host  --staging-table host_stage_"+region+" --clear-staging-table --export-dir /user/hdfs/out/host/"+region+"/part-* --input-fields-terminated-by '\\t' --input-lines-terminated-by '\\n' -m 1");
+    os.system("/usr/bin/sqoop export --connect jdbc:mysql://"+dbIP+"/"+dbname+" --username "+username+" --password  "+password+" --table host  --staging-table host_stage_"+region+" --clear-staging-table --export-dir /user/hdfs/out/host/"+region+"/part-* --input-fields-terminated-by '\\t' --input-lines-terminated-by '\\n' -m 1");
     print "[H] ended host_compute/host_controller map/reducer";
 
 
