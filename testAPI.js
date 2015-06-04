@@ -15,6 +15,7 @@ var ConsumerSecret =  '<SECRET>';
 var APIip  ="<IP>";
 var APIport="<PORT>";
 var APIpath="";
+var IDMaddress="";
 
 
 var oauth2 = new OAuth2(ConsumerKey, ConsumerSecret, IDMaddress,  null, 'oauth2/token',  null);
@@ -44,7 +45,7 @@ var makeRequest=function(token){
                port:APIport,
                path:APIpath,
                method:"GET",
-               headers:{ 'Contet-type':'application/json', 'Authorization':'Bearer '+bearer, 'accept':'application/json'}
+               headers:{'Authorization':'Bearer '+bearer}
   };
   console.log("request sending")
   http.get(options,function(res2){
